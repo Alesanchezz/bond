@@ -31,12 +31,10 @@ env:
 
 before_install:
     - if [ "$TRAVIS_OS_NAME" == "linux" ]; then echo "Hardware:"; grep model\ name /proc/cpuinfo | uniq -c; free -m; fi
-    - pushd $HOME/docker-images
-    - travis_retry wget -N https://bondbinaries.blob.core.windows.net/bondbinaries/docker-images/bond-xenial.tar.gz
-    - popd
-    - time docker load -i $HOME/docker-images/bond-xenial.tar.gz
+    - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD" bondciimages.azurecr.io
+    - time travis_retry docker pull bondciimages.azurecr.io/ubuntu-1604:latest
 
 script:
-    - docker run -v $HOME/.ccache:/root/.ccache -v $HOME/.stack:/root/.stack -v `pwd`:/root/bond bond-xenial $HOME $FLAVOR $BOOST $COMPILER
+    - docker run -v $HOME/.ccache:/root/.ccache -v $HOME/.stack:/root/.stack -v `pwd`:/root/bond bondciimages.azurecr.io/ubuntu-1604:latest $HOME $FLAVOR $BOOST $COMPILER
     # docker runs as root and may leave files in the following directories that are not readable by the travis user
     - sudo chown -R travis:travis $HOME/.ccache $HOME/.stack `pwd`

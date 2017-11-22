@@ -2,6 +2,8 @@
 
 set -eux
 
+# Tickle: trying different credentials
+
 SYMLINKED_HOME=$1
 FLAVOR=$2
 BOOST=${3:-}

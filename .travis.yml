@@ -31,8 +31,9 @@ env:
 
 before_install:
     - if [ "$TRAVIS_OS_NAME" == "linux" ]; then echo "Hardware:"; grep model\ name /proc/cpuinfo | uniq -c; free -m; fi
-    - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD" bondciimages.azurecr.io
-    - time travis_retry docker pull bondciimages.azurecr.io/ubuntu-1604:latest
+    - travis_retry docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD" bondciimages.azurecr.io
+    - time travis_retry docker pull bondciimages.azurecr.io/ubuntu-1604:git-c31e5ce3b26fcd133fef3f129d9ff2ec799eb3b2
+    - docker images # Dump the image ID
 
 script:
     - docker run -v $HOME/.ccache:/root/.ccache -v $HOME/.stack:/root/.stack -v `pwd`:/root/bond bondciimages.azurecr.io/ubuntu-1604:latest $HOME $FLAVOR $BOOST $COMPILER

@@ -33,7 +33,7 @@ esac
 
 export BOND_CMAKE_FLAGS="-DBOND_USE_CCACHE=TRUE"
 # Default boost root. C++ requires a specific boost and will override this.
-export BOOST_ROOT=/opt/boosts/boost_1_63_0
+export BOOST_ROOT=/opt/boosts/boost_1_65_1
 
 mkdir -p $SYMLINKED_HOME $BUILD_ROOT
 ln -s /root/.ccache $SYMLINKED_HOME/.ccache

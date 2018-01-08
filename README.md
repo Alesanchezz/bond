@@ -47,8 +47,8 @@ Bond C++ library requires some C++11 features (currently limited to those
 supported bv Visual C++ 2013); a C++11 compiler is required. Additionally,
 to build Bond you will need CMake (3.1+),
 [Haskell Stack](https://docs.haskellstack.org/en/stable/README/#how-to-install)
-(1.5.1+) and Boost (1.58+). (Note: Boost 1.59 may not work with Bond Comm due to
-some bugs in that version of the Boost ASIO library).
+(1.5.1+) and Boost (1.61+). (Note: Older versions of Boost may work, but are
+not regularly tested.)
 
 Following are specific instructions for building on various platforms.
 
@@ -58,7 +58,7 @@ Bond must be built with C++11 compiler. We test with Clang (3.8) and GNU C++
 (5.4). We recommend Clang as it's faster with template-heavy code like Bond.
 
 Run the following commands to install the minimal set of packages needed to
-build the core Bond library on Ubuntu 14.04:
+build the core Bond library on Ubuntu 16.04:
 
 ```bash
 sudo apt-get install \
@@ -179,8 +179,9 @@ cmake .. \
 
 Install the following tools:
 
-- Visual Studio 2013 or 2015
-    - Visual Studio 2015 is required to build C# Bond from source
+- Visual Studio 2013 or 2015 or 2017
+    - Visual Studio 2015 or later is required to build C# Bond from source
+    - Visual Studio 2015 or later is required to use Bond-over-gRPC
 - CMake ([http://www.cmake.org/download/](http://www.cmake.org/download/))
 - Haskell Stack ([https://docs.haskellstack.org/en/stable/install_and_upgrade/#windows](https://docs.haskellstack.org/en/stable/install_and_upgrade/#windows))
 - .NET Core SDK ([https://www.microsoft.com/net/core](https://www.microsoft.com/net/core#windows))
@@ -192,7 +193,7 @@ If you are building on a network behind a proxy, set the environment variable
 set HTTP_PROXY=http://your-proxy-name:80
 ```
 
-Now you are ready to build the C# 4.0/4.5 version of Bond. Open the solution
+Now you are ready to build the C# 4.5 version of Bond. Open the solution
 file `cs\cs.sln` in Visual Studio and build as usual. The C# unit tests can
 also be run from within the solution.
 
@@ -205,7 +206,7 @@ switch is used to run the unit tests as well.
 
 The C++ and Python versions of Bond additionally require:
 
-- Boost 1.58+ ([http://www.boost.org/users/download/](http://www.boost.org/users/download/))
+- Boost 1.61+ ([http://www.boost.org/users/download/](http://www.boost.org/users/download/))
 - Python 2.7 ([https://www.python.org/downloads/](https://www.python.org/downloads/))
 
 You may need to set the environment variables `BOOST_ROOT` and `BOOST_LIBRARYDIR`
@@ -213,8 +214,8 @@ to specify where Boost and its pre-built libraries for your environment (MSVC 12
 found, e.g.:
 
 ```bash
-set BOOST_ROOT=D:\boost_1_58_0
-set BOOST_LIBRARYDIR=D:\boost_1_58_0\lib64-msvc-14.0
+set BOOST_ROOT=D:\boost_1_61_0
+set BOOST_LIBRARYDIR=D:\boost_1_61_0\lib64-msvc-14.0
 ```
 
 The core Bond library and most examples only require Boost headers. The
